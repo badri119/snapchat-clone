@@ -24,6 +24,7 @@ const WebcamCapture = () => {
   return (
     <div className="relative">
       <Webcam
+        className="rounded-md"
         audio={false}
         height={videoConstraints.height}
         ref={WebcamRef}

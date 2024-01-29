@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Webcam from "./components/WebcamCapture";
+import Chat from "./components/Chats";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Preview from "./components/Preview";
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Webcam />}></Route>
         <Route path="/preview" element={<Preview />}></Route>
+        <Route path="/chat" element={<Chat />}></Route>
       </Routes>
     </div>
   );
