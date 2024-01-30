@@ -26,11 +26,12 @@ const Preview = () => {
   useEffect(() => {
     //if a picture is not taken, it redirects to the homepage
     if (!cameraImage) {
-      navigate("/", { replace: true }); //replace means you can't go back to the preview page and it bascially replaces the history
+      navigate("/home", { replace: true }); //replace means you can't go back to the preview page and it bascially replaces the history
     }
   }, [cameraImage, navigate]);
   // console.log(cameraImage);
 
+  // Function to send post
   const sendPost = async () => {
     try {
       const id = uuidv4();
@@ -45,7 +46,7 @@ const Preview = () => {
       const url = await storage.ref("posts").child(id).getDownloadURL();
       //console.log(url);
 
-      // Add the post to the collection
+      // Add the post to the collection with the keys
       await db.collection("posts").add({
         imageURL: url,
         username: "Badri",
