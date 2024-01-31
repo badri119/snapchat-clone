@@ -27,7 +27,7 @@ const WebcamCapture = () => {
     navigate("/preview");
   }, [WebcamRef]);
   return (
-    <div className="relative">
+    <div className="relative bg-yellow-400 rounded-md">
       <Webcam
         className="rounded-md"
         audio={false}
@@ -37,7 +37,7 @@ const WebcamCapture = () => {
         width={videoConstraints.width}
         videoConstraints={videoConstraints}
       ></Webcam>
-      <div className="absolute bottom-0 flex w-full justify-center text-white mb-1">
+      <div className="absolute bottom-0 flex w-full justify-center text-white mb-1 hover:text-black cursor-pointer">
         <RadioButtonUncheckedIcon style={customButton} onClick={capture} />
       </div>
     </div>

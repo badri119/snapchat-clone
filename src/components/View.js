@@ -19,7 +19,7 @@ const View = () => {
   }, [selectedImage]);
 
   return (
-    <div className="relative">
+    <div className="relative bg-yellow-400 rounded-md">
       <img
         src={selectedImage}
         alt="user"
