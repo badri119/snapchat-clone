@@ -16,6 +16,11 @@ const Chat = ({ id, profilePic, username, timestamp, imageUrl, read }) => {
     height: 35,
   };
 
+  const picButoon = {
+    width: 45,
+    height: 45,
+  };
+
   //function to see if the picture is not opened,  use dispatch to get the image,
   //and change the read key to true in the firestore
   const open = () => {
@@ -34,7 +39,7 @@ const Chat = ({ id, profilePic, username, timestamp, imageUrl, read }) => {
 
   return (
     <div
-      className="flex justify-between p-2 items-center border-b border-solid border-b-slate-200 cursor-pointer hover:opacity-80"
+      className="flex justify-between p-2 items-center border-b border-solid border-b-slate-200 "
       onClick={open}
     >
       <Avatar style={avatarStyle} />
@@ -47,7 +52,12 @@ const Chat = ({ id, profilePic, username, timestamp, imageUrl, read }) => {
           ></ReactTimeago>
         </p>
       </div>
-      {!read && <StopRounded className="text-red-600" />}
+      {!read && (
+        <StopRounded
+          className="text-red-600 cursor-pointer hover:opacity-80"
+          style={picButoon}
+        />
+      )}
     </div>
   );
 };
