@@ -1,4 +1,4 @@
-import { Logout, RadioButtonUnchecked, Search } from "@mui/icons-material";
+import { Logout, RadioButtonUnchecked } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { auth, db } from "../firebase";

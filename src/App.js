@@ -7,7 +7,6 @@ import Preview from "./components/Preview";
 import View from "./components/View";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
-import Logout from "./components/Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "./firebase";
 import { login, logout, selectUser } from "./features/appSlice";
