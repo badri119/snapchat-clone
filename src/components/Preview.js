@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCameraImage, resetCameraImage } from "../features/cameraSlice";
 import { useNavigate } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close";
+import Close from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import { v4 as uuidv4 } from "uuid";
 import "../css/preview.css";
 import firebase from "firebase/compat/app";
 import "firebase/firestore";
 import { db, storage } from "../firebase";
+import { selectUser } from "../features/appSlice";
 
 const imageStyle = {
-  width: 250,
-  height: 400,
+  width: 350,
+  height: 550,
 };
 
 const iconSize = {
@@ -23,10 +24,11 @@ const Preview = () => {
   const navigate = useNavigate();
   const cameraImage = useSelector(selectCameraImage);
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   useEffect(() => {
     //if a picture is not taken, it redirects to the homepage
     if (!cameraImage) {
-      navigate("/home", { replace: true }); //replace means you can't go back to the preview page and it bascially replaces the history
+      navigate("/", { replace: true }); //replace means you can't go back to the preview page and it bascially replaces the history
     }
   }, [cameraImage, navigate]);
   // console.log(cameraImage);
@@ -34,6 +36,7 @@ const Preview = () => {
   // Function to send post
   const sendPost = async () => {
     try {
+      // generates a random id
       const id = uuidv4();
 
       // Upload the image
@@ -49,8 +52,9 @@ const Preview = () => {
       // Add the post to the collection with the keys
       await db.collection("posts").add({
         imageURL: url,
-        username: "Badri",
+        username: user.username,
         read: false,
+        profilePic: user.profilePic,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
 
@@ -64,11 +68,12 @@ const Preview = () => {
 
   const closePreview = () => {
     dispatch(resetCameraImage());
+    navigate("/chat");
   };
 
   return (
     <div className="relative">
-      <CloseIcon
+      <Close
         className="absolute m-1 text-white cursor-pointer hover:bg-white hover:text-black hover:rounded-full"
         onClick={closePreview}
         style={iconSize}

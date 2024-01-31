@@ -10,9 +10,7 @@ const Login = () => {
   const signIn = async () => {
     try {
       const result = await auth.signInWithPopup(provider);
-      const token = result.user.uid;
-      //   console.log(result);
-      localStorage.setItem("token", token);
+      // console.log(result);
 
       dispatch(
         login({
@@ -23,6 +21,7 @@ const Login = () => {
       );
       navigate("/chat");
     } catch (error) {
+      console.error("Authentication Error:", error);
       alert(error.message);
     }
   };

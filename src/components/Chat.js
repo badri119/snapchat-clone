@@ -1,6 +1,6 @@
 import { StopRounded } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import ReactTimeago from "react-timeago";
 import { selectImage, selectUser } from "../features/appSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +37,7 @@ const Chat = ({ id, profilePic, username, timestamp, imageUrl, read }) => {
       className="flex justify-between p-2 items-center border-b border-solid border-b-slate-200 cursor-pointer hover:opacity-80"
       onClick={open}
     >
-      <Avatar style={avatarStyle} />
+      <Avatar src={profilePic} style={avatarStyle} />
       <div className=" pl-1.5 flex-1">
         <h1 className="text-lg font-medium">{username}</h1>
         <p className="text-xs">

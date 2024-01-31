@@ -1,14 +1,18 @@
-import { Button } from "@mui/material";
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-    auth.signOut();
+  const logout = async () => {
+    // localStorage.removeItem("token");
+
+    try {
+      await auth.signOut();
+      navigate("/");
+    } catch (error) {
+      console.error("Error during sign out:", error);
+    }
   };
   return (
     <div>
