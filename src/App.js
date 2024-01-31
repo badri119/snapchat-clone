@@ -10,40 +10,23 @@ import Login from "./components/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "./firebase";
 import { login, logout, selectUser } from "./features/appSlice";
+import useAuth from "./components/useAuth";
 
 function App() {
   const user = useSelector(selectUser);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        dispatch(
-          login({
-            username: authUser.displayName,
-            profilePic: authUser.profilePic,
-            id: authUser.uid,
-          })
-        );
-      } else {
-        dispatch(logout());
-      }
-    });
-  }, []);
+  useAuth();
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-yellow-400">
       <Routes>
-        {!user ? (
-          <Route exact path="/" element={<Login />} />
-        ) : (
-          <>
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/home" element={<Webcam />} />
-            <Route path="/preview" element={<Preview />} />
-            <Route path="/chat/view" element={<View />} />
-          </>
-        )}
+        <Route exact path="/" element={<Login />} />
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/home" element={<Webcam />} />
+          <Route path="/preview" element={<Preview />} />
+          <Route path="/chat/view" element={<View />} />
+        </Route>
       </Routes>
     </div>
   );

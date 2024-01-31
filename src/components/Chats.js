@@ -57,7 +57,7 @@ const Chats = () => {
   return (
     <div className="relative" style={customStyle}>
       <div className="flex rounded-md justify-between items-center px-2.5 bg-sky-500 h-12">
-        <Avatar src={user.profilePic} style={avatarStyle} />
+        <Avatar style={avatarStyle} />
 
         <div className="has-tooltip">
           <span className="tooltip text-sm font-bold w-28 rounded shadow-lg p-1 bg-gray-100 text-sky-500 -mt-8">

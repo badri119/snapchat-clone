@@ -10,6 +10,7 @@ import firebase from "firebase/compat/app";
 import "firebase/firestore";
 import { db, storage } from "../firebase";
 import { selectUser } from "../features/appSlice";
+import avatar from "../images/avatar.png";
 
 const imageStyle = {
   width: 350,
@@ -28,7 +29,7 @@ const Preview = () => {
   useEffect(() => {
     //if a picture is not taken, it redirects to the homepage
     if (!cameraImage) {
-      navigate("/", { replace: true }); //replace means you can't go back to the preview page and it bascially replaces the history
+      navigate("/chat", { replace: true }); //replace means you can't go back to the preview page and it bascially replaces the history
     }
   }, [cameraImage, navigate]);
   // console.log(cameraImage);
@@ -54,7 +55,7 @@ const Preview = () => {
         imageURL: url,
         username: user.username,
         read: false,
-        profilePic: user.profilePic,
+        profilePic: user.profilePic || avatar,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
 
